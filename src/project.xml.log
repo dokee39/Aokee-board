@@ -1,0 +1,531 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<buildlog>
+  <outpath>.</outpath>
+  <operation>
+    <module>lbuild</module>
+    <source>buildlog.xml.in</source>
+    <destination>project.xml.log</destination>
+  </operation>
+  <operation>
+    <module>modm:architecture</module>
+    <source>../ext/modm/src/modm/architecture/architecture.hpp</source>
+    <destination>modm/src/modm/architecture.hpp</destination>
+    <time>0.064 ms</time>
+  </operation>
+  <operation>
+    <module>modm:architecture</module>
+    <source>../ext/modm/src/modm/architecture/detect.hpp</source>
+    <destination>modm/src/modm/architecture/detect.hpp</destination>
+    <time>0.065 ms</time>
+  </operation>
+  <operation>
+    <module>modm:architecture</module>
+    <source>../ext/modm/src/modm/architecture/interface.hpp.in</source>
+    <destination>modm/src/modm/architecture/interface.hpp</destination>
+    <time>0.747 ms</time>
+  </operation>
+  <operation>
+    <module>modm:architecture</module>
+    <source>../ext/modm/src/modm/architecture/interface/peripheral.hpp</source>
+    <destination>modm/src/modm/architecture/interface/peripheral.hpp</destination>
+    <time>0.064 ms</time>
+  </operation>
+  <operation>
+    <module>modm:architecture</module>
+    <source>../ext/modm/src/modm/architecture/utils.hpp</source>
+    <destination>modm/src/modm/architecture/utils.hpp</destination>
+    <time>0.082 ms</time>
+  </operation>
+  <operation>
+    <module>modm:architecture:assert</module>
+    <source>../ext/modm/src/modm/architecture/interface/assert.h.in</source>
+    <destination>modm/src/modm/architecture/interface/assert.h</destination>
+    <time>1.596 ms</time>
+  </operation>
+  <operation>
+    <module>modm:architecture:assert</module>
+    <source>../ext/modm/src/modm/architecture/interface/assert.hpp.in</source>
+    <destination>modm/src/modm/architecture/interface/assert.hpp</destination>
+    <time>1.204 ms</time>
+  </operation>
+  <operation>
+    <module>modm:architecture:atomic</module>
+    <source>../ext/modm/src/modm/architecture/driver/atomic.hpp</source>
+    <destination>modm/src/modm/architecture/driver/atomic.hpp</destination>
+    <time>0.064 ms</time>
+  </operation>
+  <operation>
+    <module>modm:architecture:atomic</module>
+    <source>../ext/modm/src/modm/architecture/driver/atomic/container.hpp</source>
+    <destination>modm/src/modm/architecture/driver/atomic/container.hpp</destination>
+    <time>0.084 ms</time>
+  </operation>
+  <operation>
+    <module>modm:architecture:atomic</module>
+    <source>../ext/modm/src/modm/architecture/driver/atomic/flag.cpp</source>
+    <destination>modm/src/modm/architecture/driver/atomic/flag.cpp</destination>
+    <time>0.046 ms</time>
+  </operation>
+  <operation>
+    <module>modm:architecture:atomic</module>
+    <source>../ext/modm/src/modm/architecture/driver/atomic/flag.hpp</source>
+    <destination>modm/src/modm/architecture/driver/atomic/flag.hpp</destination>
+    <time>0.048 ms</time>
+  </operation>
+  <operation>
+    <module>modm:architecture:atomic</module>
+    <source>../ext/modm/src/modm/architecture/driver/atomic/queue.hpp</source>
+    <destination>modm/src/modm/architecture/driver/atomic/queue.hpp</destination>
+    <time>0.046 ms</time>
+  </operation>
+  <operation>
+    <module>modm:architecture:atomic</module>
+    <source>../ext/modm/src/modm/architecture/driver/atomic/queue_impl.hpp</source>
+    <destination>modm/src/modm/architecture/driver/atomic/queue_impl.hpp</destination>
+    <time>0.047 ms</time>
+  </operation>
+  <operation>
+    <module>modm:architecture:atomic</module>
+    <source>../ext/modm/src/modm/architecture/interface/atomic_lock.hpp</source>
+    <destination>modm/src/modm/architecture/interface/atomic_lock.hpp</destination>
+    <time>0.066 ms</time>
+  </operation>
+  <operation>
+    <module>modm:architecture:interrupt</module>
+    <source>../ext/modm/src/modm/architecture/interface/interrupt.hpp</source>
+    <destination>modm/src/modm/architecture/interface/interrupt.hpp</destination>
+    <time>0.067 ms</time>
+  </operation>
+  <operation>
+    <module>modm:architecture:register</module>
+    <source>../ext/modm/src/modm/architecture/interface/register.hpp</source>
+    <destination>modm/src/modm/architecture/interface/register.hpp</destination>
+    <time>0.098 ms</time>
+  </operation>
+  <operation>
+    <module>modm:cmsis:core</module>
+    <source>../ext/modm/ext/arm/cmsis/CMSIS/Core/Include/cmsis_compiler.h</source>
+    <destination>modm/ext/cmsis/core/cmsis_compiler.h</destination>
+    <time>0.074 ms</time>
+  </operation>
+  <operation>
+    <module>modm:cmsis:core</module>
+    <source>../ext/modm/ext/arm/cmsis/CMSIS/Core/Include/cmsis_gcc.h</source>
+    <destination>modm/ext/cmsis/core/cmsis_gcc.h</destination>
+    <time>0.077 ms</time>
+  </operation>
+  <operation>
+    <module>modm:cmsis:core</module>
+    <source>../ext/modm/ext/arm/cmsis/CMSIS/Core/Include/cmsis_version.h</source>
+    <destination>modm/ext/cmsis/core/cmsis_version.h</destination>
+    <time>0.095 ms</time>
+  </operation>
+  <operation>
+    <module>modm:cmsis:core</module>
+    <source>../ext/modm/ext/arm/cmsis/CMSIS/Core/Include/core_cm4.h</source>
+    <destination>modm/ext/cmsis/core/core_cm4.h</destination>
+    <time>0.235 ms</time>
+  </operation>
+  <operation>
+    <module>modm:cmsis:core</module>
+    <source>../ext/modm/ext/arm/cmsis/CMSIS/Core/Include/m-profile/armv7m_mpu.h</source>
+    <destination>modm/ext/cmsis/core/m-profile/armv7m_mpu.h</destination>
+    <time>0.068 ms</time>
+  </operation>
+  <operation>
+    <module>modm:cmsis:core</module>
+    <source>../ext/modm/ext/arm/cmsis/CMSIS/Core/Include/m-profile/cmsis_gcc_m.h</source>
+    <destination>modm/ext/cmsis/core/m-profile/cmsis_gcc_m.h</destination>
+    <time>0.093 ms</time>
+  </operation>
+  <operation>
+    <module>modm:cmsis:device</module>
+    <source>../ext/modm/ext/st/device.hpp.in</source>
+    <destination>modm/src/modm/platform/device.hpp</destination>
+    <time>1.523 ms</time>
+  </operation>
+  <operation>
+    <module>modm:cmsis:device</module>
+    <source>../ext/modm/ext/st/peripherals.hpp.in</source>
+    <destination>modm/src/modm/platform/core/peripherals.hpp</destination>
+    <time>0.599 ms</time>
+  </operation>
+  <operation>
+    <module>modm:cmsis:device</module>
+    <source>../ext/modm/ext/st/stm32/stm32g4xx/Include/stm32g431xx.h</source>
+    <destination>modm/ext/cmsis/device/stm32g431xx.h</destination>
+    <time>0.529 ms</time>
+  </operation>
+  <operation>
+    <module>modm:cmsis:device</module>
+    <source>../ext/modm/ext/st/stm32/stm32g4xx/Include/stm32g4xx.h</source>
+    <destination>modm/ext/cmsis/device/stm32g4xx.h</destination>
+    <time>0.069 ms</time>
+  </operation>
+  <operation>
+    <module>modm:cmsis:device</module>
+    <source>../ext/modm/ext/st/stm32/stm32g4xx/Include/system_stm32g4xx.h</source>
+    <destination>modm/ext/cmsis/device/system_stm32g4xx.h</destination>
+    <time>0.076 ms</time>
+  </operation>
+  <operation>
+    <module>modm:docs</module>
+    <source>../ext/modm/README.md</source>
+    <destination>modm/docs/README.md</destination>
+    <time>0.074 ms</time>
+  </operation>
+  <operation>
+    <module>modm:docs</module>
+    <source>../ext/modm/tools/doc_generator/custom.css</source>
+    <destination>modm/docs/custom.css</destination>
+    <time>0.067 ms</time>
+  </operation>
+  <operation>
+    <module>modm:docs</module>
+    <source>../ext/modm/tools/doc_generator/custom_dark_theme.css</source>
+    <destination>modm/docs/custom_dark_theme.css</destination>
+    <time>0.065 ms</time>
+  </operation>
+  <operation>
+    <module>modm:docs</module>
+    <source>../ext/modm/tools/doc_generator/doxyfile.cfg.in</source>
+    <destination>modm/docs/doxyfile.cfg</destination>
+    <time>0.954 ms</time>
+  </operation>
+  <operation>
+    <module>modm:docs</module>
+    <source>../ext/modm/tools/doc_generator/doxypress.json.in</source>
+    <destination>modm/docs/doxypress.json</destination>
+    <time>1.828 ms</time>
+  </operation>
+  <operation>
+    <module>modm:docs</module>
+    <source>../ext/modm/tools/doc_generator/footer.html</source>
+    <destination>modm/docs/footer.html</destination>
+    <time>0.081 ms</time>
+  </operation>
+  <operation>
+    <module>modm:docs</module>
+    <source>../ext/modm/tools/doc_generator/group.dox.in</source>
+    <destination>modm/docs/dox/modm-architecture-assert.dox</destination>
+    <time>1.949 ms</time>
+  </operation>
+  <operation>
+    <module>modm:docs</module>
+    <source>../ext/modm/tools/doc_generator/group.dox.in</source>
+    <destination>modm/docs/dox/modm-architecture-atomic.dox</destination>
+    <time>1.842 ms</time>
+  </operation>
+  <operation>
+    <module>modm:docs</module>
+    <source>../ext/modm/tools/doc_generator/group.dox.in</source>
+    <destination>modm/docs/dox/modm-architecture-interrupt.dox</destination>
+    <time>1.885 ms</time>
+  </operation>
+  <operation>
+    <module>modm:docs</module>
+    <source>../ext/modm/tools/doc_generator/group.dox.in</source>
+    <destination>modm/docs/dox/modm-architecture-register.dox</destination>
+    <time>1.866 ms</time>
+  </operation>
+  <operation>
+    <module>modm:docs</module>
+    <source>../ext/modm/tools/doc_generator/group.dox.in</source>
+    <destination>modm/docs/dox/modm-architecture.dox</destination>
+    <time>2.105 ms</time>
+  </operation>
+  <operation>
+    <module>modm:docs</module>
+    <source>../ext/modm/tools/doc_generator/group.dox.in</source>
+    <destination>modm/docs/dox/modm-cmsis-core.dox</destination>
+    <time>1.852 ms</time>
+  </operation>
+  <operation>
+    <module>modm:docs</module>
+    <source>../ext/modm/tools/doc_generator/group.dox.in</source>
+    <destination>modm/docs/dox/modm-cmsis-device.dox</destination>
+    <time>1.865 ms</time>
+  </operation>
+  <operation>
+    <module>modm:docs</module>
+    <source>../ext/modm/tools/doc_generator/group.dox.in</source>
+    <destination>modm/docs/dox/modm-cmsis.dox</destination>
+    <time>1.955 ms</time>
+  </operation>
+  <operation>
+    <module>modm:docs</module>
+    <source>../ext/modm/tools/doc_generator/group.dox.in</source>
+    <destination>modm/docs/dox/modm-docs.dox</destination>
+    <time>1.859 ms</time>
+  </operation>
+  <operation>
+    <module>modm:docs</module>
+    <source>../ext/modm/tools/doc_generator/group.dox.in</source>
+    <destination>modm/docs/dox/modm-math-units.dox</destination>
+    <time>1.903 ms</time>
+  </operation>
+  <operation>
+    <module>modm:docs</module>
+    <source>../ext/modm/tools/doc_generator/group.dox.in</source>
+    <destination>modm/docs/dox/modm-math-utils.dox</destination>
+    <time>1.858 ms</time>
+  </operation>
+  <operation>
+    <module>modm:docs</module>
+    <source>../ext/modm/tools/doc_generator/group.dox.in</source>
+    <destination>modm/docs/dox/modm-math.dox</destination>
+    <time>1.850 ms</time>
+  </operation>
+  <operation>
+    <module>modm:docs</module>
+    <source>../ext/modm/tools/doc_generator/group.dox.in</source>
+    <destination>modm/docs/dox/modm-platform-core.dox</destination>
+    <time>1.973 ms</time>
+  </operation>
+  <operation>
+    <module>modm:docs</module>
+    <source>../ext/modm/tools/doc_generator/group.dox.in</source>
+    <destination>modm/docs/dox/modm-platform-cortex-m.dox</destination>
+    <time>2.544 ms</time>
+  </operation>
+  <operation>
+    <module>modm:docs</module>
+    <source>../ext/modm/tools/doc_generator/group.dox.in</source>
+    <destination>modm/docs/dox/modm-platform.dox</destination>
+    <time>1.865 ms</time>
+  </operation>
+  <operation>
+    <module>modm:docs</module>
+    <source>../ext/modm/tools/doc_generator/group.dox.in</source>
+    <destination>modm/docs/dox/modm-stdc--.dox</destination>
+    <time>1.964 ms</time>
+  </operation>
+  <operation>
+    <module>modm:docs</module>
+    <source>../ext/modm/tools/doc_generator/group.dox.in</source>
+    <destination>modm/docs/dox/modm-stdc.dox</destination>
+    <time>1.911 ms</time>
+  </operation>
+  <operation>
+    <module>modm:math</module>
+    <source>../ext/modm/src/modm/math/math.hpp.in</source>
+    <destination>modm/src/modm/math.hpp</destination>
+    <time>0.709 ms</time>
+  </operation>
+  <operation>
+    <module>modm:math</module>
+    <source>../ext/modm/src/modm/math/tolerance.hpp</source>
+    <destination>modm/src/modm/math/tolerance.hpp</destination>
+    <time>0.086 ms</time>
+  </operation>
+  <operation>
+    <module>modm:math:units</module>
+    <source>../ext/modm/src/modm/math/units.hpp</source>
+    <destination>modm/src/modm/math/units.hpp</destination>
+    <time>0.089 ms</time>
+  </operation>
+  <operation>
+    <module>modm:math:utils</module>
+    <source>../ext/modm/src/modm/math/utils.hpp</source>
+    <destination>modm/src/modm/math/utils.hpp</destination>
+    <time>0.066 ms</time>
+  </operation>
+  <operation>
+    <module>modm:math:utils</module>
+    <source>../ext/modm/src/modm/math/utils/arithmetic_traits.hpp</source>
+    <destination>modm/src/modm/math/utils/arithmetic_traits.hpp</destination>
+    <time>0.047 ms</time>
+  </operation>
+  <operation>
+    <module>modm:math:utils</module>
+    <source>../ext/modm/src/modm/math/utils/bit_constants.hpp</source>
+    <destination>modm/src/modm/math/utils/bit_constants.hpp</destination>
+    <time>0.044 ms</time>
+  </operation>
+  <operation>
+    <module>modm:math:utils</module>
+    <source>../ext/modm/src/modm/math/utils/bit_operation.cpp</source>
+    <destination>modm/src/modm/math/utils/bit_operation.cpp</destination>
+    <time>0.046 ms</time>
+  </operation>
+  <operation>
+    <module>modm:math:utils</module>
+    <source>../ext/modm/src/modm/math/utils/bit_operation.hpp</source>
+    <destination>modm/src/modm/math/utils/bit_operation.hpp</destination>
+    <time>0.055 ms</time>
+  </operation>
+  <operation>
+    <module>modm:math:utils</module>
+    <source>../ext/modm/src/modm/math/utils/crc.hpp</source>
+    <destination>modm/src/modm/math/utils/crc.hpp</destination>
+    <time>0.044 ms</time>
+  </operation>
+  <operation>
+    <module>modm:math:utils</module>
+    <source>../ext/modm/src/modm/math/utils/endianness.hpp</source>
+    <destination>modm/src/modm/math/utils/endianness.hpp</destination>
+    <time>0.045 ms</time>
+  </operation>
+  <operation>
+    <module>modm:math:utils</module>
+    <source>../ext/modm/src/modm/math/utils/integer_traits.hpp</source>
+    <destination>modm/src/modm/math/utils/integer_traits.hpp</destination>
+    <time>0.059 ms</time>
+  </operation>
+  <operation>
+    <module>modm:math:utils</module>
+    <source>../ext/modm/src/modm/math/utils/misc.hpp</source>
+    <destination>modm/src/modm/math/utils/misc.hpp</destination>
+    <time>0.056 ms</time>
+  </operation>
+  <operation>
+    <module>modm:math:utils</module>
+    <source>../ext/modm/src/modm/math/utils/operator.hpp</source>
+    <destination>modm/src/modm/math/utils/operator.hpp</destination>
+    <time>0.049 ms</time>
+  </operation>
+  <operation>
+    <module>modm:math:utils</module>
+    <source>../ext/modm/src/modm/math/utils/operator_impl.hpp</source>
+    <destination>modm/src/modm/math/utils/operator_impl.hpp</destination>
+    <time>0.130 ms</time>
+  </operation>
+  <operation>
+    <module>modm:math:utils</module>
+    <source>../ext/modm/src/modm/math/utils/pc/operator.cpp</source>
+    <destination>modm/src/modm/math/utils/pc/operator.cpp</destination>
+    <time>0.073 ms</time>
+  </operation>
+  <operation>
+    <module>modm:platform</module>
+    <source>../ext/modm/src/modm/platform/platform.hpp.in</source>
+    <destination>modm/src/modm/platform.hpp</destination>
+    <time>0.704 ms</time>
+  </operation>
+  <operation>
+    <module>modm:platform:core</module>
+    <source>../ext/modm/src/modm/platform/core/cortex/delay_impl.hpp.in</source>
+    <destination>modm/src/modm/platform/core/delay_impl.hpp</destination>
+    <time>0.684 ms</time>
+  </operation>
+  <operation>
+    <module>modm:platform:core</module>
+    <source>../ext/modm/src/modm/platform/core/cortex/delay_ns.cpp.in</source>
+    <destination>modm/src/modm/platform/core/delay_ns.cpp</destination>
+    <time>1.182 ms</time>
+  </operation>
+  <operation>
+    <module>modm:platform:core</module>
+    <source>../ext/modm/src/modm/platform/core/cortex/delay_ns.hpp.in</source>
+    <destination>modm/src/modm/platform/core/delay_ns.hpp</destination>
+    <time>0.421 ms</time>
+  </operation>
+  <operation>
+    <module>modm:platform:core</module>
+    <source>../ext/modm/src/modm/platform/core/stm32/iccm.ld.in</source>
+    <destination>modm/link/linkerscript.ld</destination>
+    <time>23.161 ms</time>
+  </operation>
+  <operation>
+    <module>modm:platform:core</module>
+    <source>../ext/modm/src/modm/platform/core/stm32/startup_platform.c.in</source>
+    <destination>modm/src/modm/platform/core/startup_platform.c</destination>
+    <time>2.722 ms</time>
+  </operation>
+  <operation>
+    <module>modm:platform:cortex-m</module>
+    <source>../ext/modm/ext/eyalroz/no_printf.c.in</source>
+    <destination>modm/src/modm/platform/core/no_printf.c</destination>
+    <time>0.900 ms</time>
+  </operation>
+  <operation>
+    <module>modm:platform:cortex-m</module>
+    <source>../ext/modm/src/modm/platform/core/cortex/assert.cpp.in</source>
+    <destination>modm/src/modm/platform/core/assert.cpp</destination>
+    <time>2.955 ms</time>
+  </operation>
+  <operation>
+    <module>modm:platform:cortex-m</module>
+    <source>../ext/modm/src/modm/platform/core/cortex/assert_impl.hpp.in</source>
+    <destination>modm/src/modm/platform/core/assert_impl.hpp</destination>
+    <time>0.971 ms</time>
+  </operation>
+  <operation>
+    <module>modm:platform:cortex-m</module>
+    <source>../ext/modm/src/modm/platform/core/cortex/atomic_lock_impl.hpp.in</source>
+    <destination>modm/src/modm/platform/core/atomic_lock_impl.hpp</destination>
+    <time>0.963 ms</time>
+  </operation>
+  <operation>
+    <module>modm:platform:cortex-m</module>
+    <source>../ext/modm/src/modm/platform/core/cortex/hardware_init.hpp</source>
+    <destination>modm/src/modm/platform/core/hardware_init.hpp</destination>
+    <time>0.091 ms</time>
+  </operation>
+  <operation>
+    <module>modm:platform:cortex-m</module>
+    <source>../ext/modm/src/modm/platform/core/cortex/reset_handler.sx.in</source>
+    <destination>modm/src/modm/platform/core/reset_handler.sx</destination>
+    <time>12.689 ms</time>
+  </operation>
+  <operation>
+    <module>modm:platform:cortex-m</module>
+    <source>../ext/modm/src/modm/platform/core/cortex/startup.c.in</source>
+    <destination>modm/src/modm/platform/core/startup.c</destination>
+    <time>3.382 ms</time>
+  </operation>
+  <operation>
+    <module>modm:platform:cortex-m</module>
+    <source>../ext/modm/src/modm/platform/core/cortex/vectors.c.in</source>
+    <destination>modm/src/modm/platform/core/vectors.c</destination>
+    <time>3.525 ms</time>
+  </operation>
+  <operation>
+    <module>modm:platform:cortex-m</module>
+    <source>../ext/modm/src/modm/platform/core/cortex/vectors.hpp.in</source>
+    <destination>modm/src/modm/platform/core/vectors.hpp</destination>
+    <time>2.959 ms</time>
+  </operation>
+  <operation>
+    <module>modm:platform:cortex-m</module>
+    <source>../ext/modm/src/modm/platform/heap/cortex/no_heap.c.in</source>
+    <destination>modm/src/modm/platform/core/no_heap.c</destination>
+    <time>0.473 ms</time>
+  </operation>
+  <operation>
+    <module>modm:stdc</module>
+    <source>../ext/modm/ext/gcc/cabi_cortex.c</source>
+    <destination>modm/ext/gcc/cabi.c</destination>
+    <time>0.096 ms</time>
+  </operation>
+  <operation>
+    <module>modm:stdc++</module>
+    <source>../ext/modm/ext/gcc/atomic</source>
+    <destination>modm/ext/gcc/atomic</destination>
+    <time>0.085 ms</time>
+  </operation>
+  <operation>
+    <module>modm:stdc++</module>
+    <source>../ext/modm/ext/gcc/atomic.cpp.in</source>
+    <destination>modm/ext/gcc/atomic.cpp</destination>
+    <time>2.124 ms</time>
+  </operation>
+  <operation>
+    <module>modm:stdc++</module>
+    <source>../ext/modm/ext/gcc/cxxabi.cpp.in</source>
+    <destination>modm/ext/gcc/cxxabi.cpp</destination>
+    <time>1.400 ms</time>
+  </operation>
+  <operation>
+    <module>modm:stdc++</module>
+    <source>../ext/modm/ext/gcc/modm_atomic.hpp.in</source>
+    <destination>modm/ext/gcc/modm_atomic.hpp</destination>
+    <time>5.971 ms</time>
+  </operation>
+  <operation>
+    <module>modm:stdc++</module>
+    <source>../ext/modm/ext/gcc/new_delete.cpp.in</source>
+    <destination>modm/ext/gcc/new_delete.cpp</destination>
+    <time>2.175 ms</time>
+  </operation>
+</buildlog>
