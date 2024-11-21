@@ -7,6 +7,20 @@
   </options>
   <modules>
     <module>modm:docs</module>
+
+    <module>modm:platform:clock</module>
     <module>modm:platform:core</module>
+    <module>modm:platform:gpio</module>
+
+    <module>modm:platform:uart:1</module>
+    <module>modm:platform:uart:2</module>
+    <module>modm:platform:i2c:1</module>
+    <module>modm:platform:spi:1</module>
+    <module>modm:platform:spi:3</module>
+
+    <module>modm:driver:ws2812</module>
+    <module>modm:driver:bmi088</module>
+    <module>modm:driver:qmc5883l</module>
+    <module>modm:driver:ws2812</module>
   </modules>
 </library>

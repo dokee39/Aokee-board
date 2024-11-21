@@ -26,6 +26,7 @@ void __cxa_deleted_virtual()
 }
 
 #include <atomic>
+#include <modm/processing/fiber.hpp>
 #include <modm/platform/device.hpp>
 
 // One-time construction API, see ARM IHI0041D section 3.2.3.
@@ -54,6 +55,8 @@ __cxa_guard_acquire(guard_type *guard)
 			// We got called from inside an interrupt, but we cannot yield back
 			modm_assert(not is_in_irq, "stat.rec",
 					"Recursive initialization of a function static!", guard);
+			// we're not in an interrupt, try to yield back to the initializing fiber
+			modm::this_fiber::yield();
 		}
 		value = UNINITIALIZED;
 	}

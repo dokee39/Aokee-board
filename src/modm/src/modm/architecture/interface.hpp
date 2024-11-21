@@ -14,10 +14,26 @@
 
 #include <stdint.h>
 
+#include "interface/accessor.hpp"
+#include "interface/accessor_flash.hpp"
+#include "interface/accessor_ram.hpp"
 #include "interface/assert.hpp"
 #include "interface/atomic_lock.hpp"
+#include "interface/clock.hpp"
+#include "interface/delay.hpp"
+#include "interface/gpio.hpp"
+#include "interface/i2c.hpp"
+#include "interface/i2c_device.hpp"
+#include "interface/i2c_master.hpp"
+#include "interface/i2c_transaction.hpp"
 #include "interface/interrupt.hpp"
 #include "interface/register.hpp"
+#include "interface/spi.hpp"
+#include "interface/spi_device.hpp"
+#include "interface/spi_lock.hpp"
+#include "interface/spi_master.hpp"
+#include "interface/uart.hpp"
+#include "interface/unaligned.hpp"
 #include "interface/peripheral.hpp"
 
 #endif	// MODM_INTERFACE_HPP
