@@ -2,25 +2,36 @@
   <repositories>
     <repository><path>../ext/modm/repo.lb</path></repository>
   </repositories>
+
   <options>
     <option name="modm:target">stm32g431kbt6</option>
+    <option name="modm:tinyusb:config">device.cdc</option>
   </options>
+
   <modules>
+    <module>modm:build:make</module>
     <module>modm:docs</module>
 
     <module>modm:platform:clock</module>
     <module>modm:platform:core</module>
     <module>modm:platform:gpio</module>
+    <module>modm:platform:exti</module>
+    <module>modm:platform:dma</module>
 
     <module>modm:platform:uart:1</module>
     <module>modm:platform:uart:2</module>
     <module>modm:platform:i2c:1</module>
     <module>modm:platform:spi:1</module>
     <module>modm:platform:spi:3</module>
+    <module>modm:platform:usb</module>
 
     <module>modm:driver:ws2812</module>
     <module>modm:driver:bmi088</module>
     <module>modm:driver:qmc5883l</module>
-    <module>modm:driver:ws2812</module>
+
+    <module>modm:tinyusb:device:cdc</module>
+
+    <module>modm:processing:protothread</module>
+    <module>modm:processing:timer</module>
   </modules>
 </library>

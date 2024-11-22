@@ -19,32 +19,79 @@
 modm::ResumableResult<uint8_t>
 modm::platform::SpiMaster1::transfer(uint8_t data)
 {
-	// wait for previous transfer to finish
-	while(!SpiHal1::isTransmitRegisterEmpty())
-		modm::this_fiber::yield();
+	// this is a manually implemented "fast resumable function"
+	// there is no context or nesting protection, since we don't need it.
+	// there are only two states encoded into 1 bit (LSB of state):
+	//   1. waiting to start, and
+	//   2. waiting to finish.
 
-	// start transfer by copying data into register
-	SpiHal1::write(data);
+	// LSB != Bit0 ?
+	if ( !(state & Bit0) )
+	{
+		// wait for previous transfer to finish
+		if (!SpiHal1::isTransmitRegisterEmpty())
+			return {modm::rf::Running};
 
-	// wait for current transfer to finish
-	while(!SpiHal1::isReceiveRegisterNotEmpty())
-		modm::this_fiber::yield();
+		// start transfer by copying data into register
+		SpiHal1::write(data);
 
-	// read the received byte
+		// set LSB = Bit0
+		state |= Bit0;
+	}
+
+	if (!SpiHal1::isReceiveRegisterNotEmpty())
+		return {modm::rf::Running};
+
 	SpiHal1::read(data);
 
-	return data;
+	// transfer finished
+	state &= ~Bit0;
+	return {modm::rf::Stop, data};
 }
 
 modm::ResumableResult<void>
 modm::platform::SpiMaster1::transfer(
 		const uint8_t * tx, uint8_t * rx, std::size_t length)
 {
-	for (std::size_t index = 0; index < length; index++)
+	// this is a manually implemented "fast resumable function"
+	// there is no context or nesting protection, since we don't need it.
+	// there are only two states encoded into 1 bit (Bit1 of state):
+	//   1. initialize index, and
+	//   2. wait for 1-byte transfer to finish.
+
+	// we need to globally remember which byte we are currently transferring
+	static std::size_t index = 0;
+
+	// we are only interested in Bit1
+	switch(state & Bit1)
 	{
-		// if tx == 0, we use a dummy byte 0x00 else we copy it from the array
-		auto result = transfer(tx ? tx[index] : 0);
-		// if rx != 0, we copy the result into the array
-		if (rx) rx[index] = result;
+		case 0:
+			// we will only visit this state once
+			state |= Bit1;
+
+			// initialize index and check range
+			index = 0;
+			while (index < length)
+			{
+		default:
+		{
+				// if tx == 0, we use a dummy byte 0x00
+				// else we copy it from the array
+				// call the resumable function
+				modm::ResumableResult<uint8_t> result = transfer(tx ? tx[index] : 0);
+
+				// if the resumable function is still running, so are we
+				if (result.getState() > modm::rf::NestingError)
+					return {modm::rf::Running};
+
+				// if rx != 0, we copy the result into the array
+				if (rx) rx[index] = result.getResult();
+		}
+				index++;
+			}
+
+			// clear the state
+			state &= ~Bit1;
+			return {modm::rf::Stop};
 	}
 }
