@@ -2,6 +2,7 @@
 
 #include "modm/platform.hpp"
 #include <modm/driver/inertial/bmi088.hpp>
+#include <modm/driver/pwm/ws2812b.hpp>
 
 using namespace modm::platform;
 using namespace modm::literals;
@@ -30,6 +31,7 @@ using Bmi088 = modm::Bmi088<Bmi088Transport>;
 
 using Ws2812Spi = SpiMaster3;
 using Ws2812SpiMosi = GpioB5::Mosi;
+using Ws2812 = modm::Ws2812b<Ws2812Spi, Ws2812SpiMosi, 1>;
 
 using Qmc5883lI2c = I2cMaster1;
 using Qmc5883lI2cScl = GpioA15::Scl;
@@ -41,7 +43,7 @@ using UsbDp = GpioA12::Dp;
 using UsbDm = GpioA11::Dm;
 
 struct SystemClock {
-	static constexpr uint32_t Frequency = 144_MHz;
+	static constexpr uint32_t Frequency = 168_MHz;
 	static constexpr uint32_t Ahb = Frequency;
 	static constexpr uint32_t Apb1 = Frequency;
 	static constexpr uint32_t Apb2 = Frequency;
@@ -93,7 +95,7 @@ inline void initialize() {
 	Bmi088IntGyro::setInput(Bmi088IntGyro::InputType::PullDown);
     Bmi088IntAcc::setInput(Bmi088IntAcc::InputType::PullDown);
     Bmi088Spi::connect<Bmi088SpiSck, Bmi088SpiMiso, Bmi088SpiMosi>();
-    Bmi088Spi::initialize<SystemClock, 9_MHz, 10_pct>();
+    Bmi088Spi::initialize<SystemClock, 5.25_MHz, 10_pct>();
 
     Usb::connect<UsbDp, UsbDm>();
     Usb::initialize<SystemClock>();
