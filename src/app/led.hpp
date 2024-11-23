@@ -1,14 +1,13 @@
 #pragma once
 
-#include "modm/processing/protothread.hpp"
 #include "bsp/board.hpp"
+#include "app/task.hpp"
 
 using namespace Board;
 
-class LedTask: public modm::pt::Protothread{
-public:
-    bool run();
-private:
+class Led {
+protected:
     Ws2812 ws2812;
     modm::PreciseTimeout timeout;
 };
+

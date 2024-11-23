@@ -1,14 +1,12 @@
 #pragma once
 
 #include "bsp/board.hpp"
-#include "modm/processing/protothread.hpp"
+#include "app/task.hpp"
 
 using namespace Board;
 
-class ImuTask: public modm::pt::Protothread {
-public:
-    bool run();
-private:
+class Imu {
+protected:
     Bmi088 bmi088;
 
     std::atomic_bool is_acc_ready {false};
@@ -22,3 +20,4 @@ private:
 
     void ahrsUpdate();
 };
+

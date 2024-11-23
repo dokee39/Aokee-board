@@ -5,7 +5,8 @@
 #define KI 0.1f
 #define EI_MAX 0.02f
 
-bool ImuTask::run() {
+template <>
+bool Task<Imu>::pollInternal() {
     PT_BEGIN();
 
     PT_WAIT_UNTIL(bmi088.initialize(true));
@@ -28,6 +29,7 @@ bool ImuTask::run() {
 		is_gyro_ready = true;
 	});
 
+    PT_YIELD();
     while (true) {
         PT_WAIT_UNTIL(is_acc_ready and is_gyro_ready);
 
@@ -58,7 +60,7 @@ bool ImuTask::run() {
     PT_END();
 }
 
-void ImuTask::ahrsUpdate() {
+void Imu::ahrsUpdate() {
     acc.normalize();
 
     if(acc[0] != 0.0f or acc[1] != 0.0f or acc[2] != 0.0f) {
@@ -74,9 +76,9 @@ void ImuTask::ahrsUpdate() {
         ei += KI * dt * e;
         limit(EI_MAX)(ei);
         gyro += KP * e + ei;
-        
+
     }
-    
+
     modm::Matrix<float, 4, 4> m {
               0, -gyro[0], -gyro[1], -gyro[2],
         gyro[0],        0,  gyro[1], -gyro[2],
