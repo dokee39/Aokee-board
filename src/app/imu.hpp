@@ -1,7 +1,7 @@
 #pragma once
 
+#include "modm/architecture/driver/atomic/flag.hpp"
 #include "bsp/board.hpp"
-#include "app/task.hpp"
 
 using namespace Board;
 
@@ -9,8 +9,8 @@ class Imu {
 protected:
     Bmi088 bmi088;
 
-    std::atomic_bool is_acc_ready {false};
-    std::atomic_bool is_gyro_ready {false};
+    modm::atomic::Flag acc_ready_flag {false};
+    modm::atomic::Flag gyro_ready_flag {false};
     bool bmi088_init_ok {true};
 
     modm::Vector4f quat {0.0f};

@@ -89,13 +89,14 @@ inline void initialize() {
 
     Dma1::enable();
 
-    DbusUart::connect<DbusUartRx>();
-    Rs485Uart::connect<Rs485UartTx, Rs485UartRx>();
+    /*DbusUart::connect<DbusUartRx>();*/
+    /*Rs485Uart::connect<Rs485UartTx, Rs485UartRx>();*/
 
 	Bmi088IntGyro::setInput(Bmi088IntGyro::InputType::PullDown);
-    Bmi088IntAcc::setInput(Bmi088IntAcc::InputType::PullDown);
-    Bmi088Spi::connect<Bmi088SpiSck, Bmi088SpiMiso, Bmi088SpiMosi>();
-    Bmi088Spi::initialize<SystemClock, 5.25_MHz, 10_pct>();
+	Bmi088IntAcc::setInput(Bmi088IntAcc::InputType::PullDown);
+	Bmi088Spi::connect<Bmi088SpiSck, Bmi088SpiMiso, Bmi088SpiMosi>();
+	Bmi088Spi::initialize<SystemClock, 5.25_MHz, 0_pct>();
+    Bmi088Spi::setDataMode(Bmi088Spi::DataMode::Mode1);
 
     Usb::connect<UsbDp, UsbDm>();
     Usb::initialize<SystemClock>();

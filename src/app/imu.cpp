@@ -1,4 +1,5 @@
 #include "app/imu.hpp"
+#include "app/task.hpp"
 #include "util.hpp"
 
 #define KP 0.5f
@@ -23,15 +24,15 @@ bool Task<Imu>::pollInternal() {
     // TODO bmi088_init_ok
 
 	Exti::connect<Bmi088IntAcc>(Exti::Trigger::RisingEdge, [&](auto){
-		is_acc_ready = true;
+		acc_ready_flag.set();
 	});
 	Exti::connect<Bmi088IntGyro>(Exti::Trigger::RisingEdge, [&](auto){
-		is_gyro_ready = true;
+		gyro_ready_flag.set();
 	});
 
     PT_YIELD();
     while (true) {
-        PT_WAIT_UNTIL(is_acc_ready and is_gyro_ready);
+        PT_WAIT_UNTIL(acc_ready_flag.test() and gyro_ready_flag.test());
 
         {
             static auto t = modm::PreciseClock::now();
@@ -43,13 +44,13 @@ bool Task<Imu>::pollInternal() {
         }
 
 		const std::optional acc_result = bmi088.readAccData();
-		is_acc_ready = false;
+		acc_ready_flag.reset();
 		if (acc_result) {
 			acc = acc_result->getFloat();
 		}
 
 		const std::optional gyro_result = bmi088.readGyroData();
-		is_gyro_ready = false;
+		gyro_ready_flag.reset();
 		if (gyro_result) {
 			gyro = gyro_result->getFloat();
 		}
