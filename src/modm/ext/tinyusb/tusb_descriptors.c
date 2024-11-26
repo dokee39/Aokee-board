@@ -123,10 +123,10 @@ modm_weak const char*
 tud_string_desc_arr[] =
 {
 	NULL,				// 0: Language
-	"TinyUSB",			// 1: Manufacturer
-	"TinyUSB Device",	// 2: Product
+	"dokee",			// 1: Manufacturer
+	"Aokee-board",	// 2: Product
 	NULL,				// 3: Serials, should use chip ID
-	"TinyUSB CDC0",		// 4: CDC0 Interface
+	"Aokee-board CDC",		// 4: CDC0 Interface
 };
 
 static uint16_t _desc_str[33];

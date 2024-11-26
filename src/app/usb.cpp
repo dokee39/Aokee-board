@@ -10,6 +10,7 @@ bool Task<Usb>::pollInternal() {
     PT_YIELD();
     while (true) {
         tud_task();
+        usb_uart0_stream << "Link Start!" << modm::endl;
         PT_WAIT_UNTIL(timer.execute());
     }
 

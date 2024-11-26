@@ -38,7 +38,7 @@ using Qmc5883lI2cScl = GpioA15::Scl;
 using Qmc5883lI2cSda = GpioB7::Sda;
 using Qmc5883lDrdy = GpioB6;
 
-using Usb = UsbFs;
+using Usbd = UsbFs;
 using UsbDp = GpioA12::Dp;
 using UsbDm = GpioA11::Dm;
 
@@ -94,11 +94,21 @@ inline void initialize() {
 
 	Bmi088IntGyro::setInput(Bmi088IntGyro::InputType::PullDown);
 	Bmi088IntAcc::setInput(Bmi088IntAcc::InputType::PullDown);
+	Bmi088CsGyro::setInput(Bmi088IntGyro::InputType::PullDown);
+	Bmi088CsAcc::setInput(Bmi088IntAcc::InputType::PullDown);
 	Bmi088Spi::connect<Bmi088SpiSck, Bmi088SpiMiso, Bmi088SpiMosi>();
 	Bmi088Spi::initialize<SystemClock, 5.25_MHz, 0_pct>();
     Bmi088Spi::setDataMode(Bmi088Spi::DataMode::Mode1);
+}
 
-    Usb::connect<UsbDp, UsbDm>();
-    Usb::initialize<SystemClock>();
+inline void initializeUsbFs() {
+    /*reset*/
+    USB->CNTR = (uint16_t)USB_CNTR_FRES;
+    USB->CNTR = 0u;
+    USB->ISTR = 0u;
+    USB->BTABLE = 0u;
+
+    Usbd::connect<UsbDp, UsbDm>();
+    Usbd::initialize<SystemClock>();
 }
 }
