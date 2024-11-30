@@ -1,8 +1,9 @@
 #pragma once
 
 #include "modm/platform.hpp"
-#include <modm/driver/inertial/bmi088.hpp>
-#include <modm/driver/pwm/ws2812b.hpp>
+#include "modm/driver/inertial/bmi088.hpp"
+#include "modm/driver/pwm/ws2812b.hpp"
+#include "bsp/spi_master_1_dma_block.hpp"
 
 using namespace modm::platform;
 using namespace modm::literals;
@@ -18,7 +19,8 @@ using Rs485UartDe = GpioA1::De;
 using Rs485UartTx = GpioA2::Tx;
 using Rs485UartRx = GpioA3::Rx;
 
-using Bmi088Spi = SpiMaster1_Dma<Dma1::Channel1, Dma1::Channel2>;
+using Bmi088Spi = SpiMaster1_DmaBlock<Dma1::Channel1, Dma1::Channel2>;
+/*using Bmi088Spi = SpiMaster1;*/
 using Bmi088SpiSck = GpioA5::Sck;
 using Bmi088SpiMiso = GpioA6::Miso;
 using Bmi088SpiMosi = GpioA7::Mosi;
@@ -90,15 +92,27 @@ inline void initialize() {
     Dma1::enable();
 
     /*DbusUart::connect<DbusUartRx>();*/
-    /*Rs485Uart::connect<Rs485UartTx, Rs485UartRx>();*/
 
-	Bmi088IntGyro::setInput(Bmi088IntGyro::InputType::PullDown);
-	Bmi088IntAcc::setInput(Bmi088IntAcc::InputType::PullDown);
-	Bmi088CsGyro::setInput(Bmi088IntGyro::InputType::PullDown);
-	Bmi088CsAcc::setInput(Bmi088IntAcc::InputType::PullDown);
+    GpioStatic<Rs485UartTx::Data>::setOutput(
+        Gpio::OutputType::PushPull, Gpio::OutputSpeed::VeryHigh);
+    Rs485Uart::connect<Rs485UartTx, Rs485UartRx>();
+    Rs485Uart::initialize<SystemClock, 4_MHz, 0_pct>();
+
+    GpioStatic<Rs485UartDe::Data>::setOutput(
+        Gpio::OutputType::PushPull, Gpio::OutputSpeed::VeryHigh);
+    GpioStatic<Rs485UartDe::Data>::setAlternateFunction(0x07);
+    UsartHal2::disableOperation();
+    USART2->CR3 |= USART_CR3_DEM;
+    USART2->CR3 = (USART2->CR3 & (~USART_CR3_DEP)) | (/*DE polarity is high*/ true ? 0 : USART_CR3_DEP);
+    USART2->CR1 = (USART2->CR1 & ~(USART_CR1_DEDT | USART_CR1_DEAT)) | (/*deassertion time*/ 0u << 16u) | (/*assertion time*/ 0u << 21u);
+    UsartHal2::enableOperation();
+
+	GpioSet<Bmi088IntAcc, Bmi088IntGyro>::setInput(
+        Gpio::InputType::PullDown);
+	GpioSet<Bmi088CsAcc, Bmi088CsGyro>::setOutput(
+        Gpio::OutputType::PushPull, Gpio::OutputSpeed::VeryHigh);
 	Bmi088Spi::connect<Bmi088SpiSck, Bmi088SpiMiso, Bmi088SpiMosi>();
-	Bmi088Spi::initialize<SystemClock, 5.25_MHz, 0_pct>();
-    Bmi088Spi::setDataMode(Bmi088Spi::DataMode::Mode1);
+	Bmi088Spi::initialize<SystemClock, 10.5_MHz, 0_pct>();
 }
 
 inline void initializeUsbFs() {
@@ -108,6 +122,8 @@ inline void initializeUsbFs() {
     USB->ISTR = 0u;
     USB->BTABLE = 0u;
 
+    GpioSet<GpioStatic<UsbDp::Data>, GpioStatic<UsbDm::Data>>::setOutput(
+        Gpio::OutputType::PushPull, Gpio::OutputSpeed::VeryHigh);
     Usbd::connect<UsbDp, UsbDm>();
     Usbd::initialize<SystemClock>();
 }
