@@ -2,6 +2,7 @@
 
 #include "modm/platform.hpp"
 #include "modm/driver/inertial/bmi088.hpp"
+#include "modm/driver/inertial/qmc5883l.hpp"
 #include "modm/driver/pwm/ws2812b.hpp"
 #include "bsp/spi_master_1_dma_block.hpp"
 
@@ -39,6 +40,7 @@ using Qmc5883lI2c = I2cMaster1;
 using Qmc5883lI2cScl = GpioA15::Scl;
 using Qmc5883lI2cSda = GpioB7::Sda;
 using Qmc5883lDrdy = GpioB6;
+using Qmc5883 = Qmc5883l<I2cMaster1>;
 
 using Usbd = UsbFs;
 using UsbDp = GpioA12::Dp;
@@ -113,6 +115,11 @@ inline void initialize() {
         Gpio::OutputType::PushPull, Gpio::OutputSpeed::VeryHigh);
 	Bmi088Spi::connect<Bmi088SpiSck, Bmi088SpiMiso, Bmi088SpiMosi>();
 	Bmi088Spi::initialize<SystemClock, 10.5_MHz, 0_pct>();
+
+    GpioStatic<Qmc5883lDrdy::Data>::setInput(
+        Gpio::InputType::PullUp);
+    Qmc5883lI2c::connect<Qmc5883lI2cScl, Qmc5883lI2cSda>();
+    Qmc5883lI2c::initialize<SystemClock, 1_MHz, 1_pct>();
 }
 
 inline void initializeUsbFs() {

@@ -20,10 +20,13 @@ bool Task<Imu>::pollInternal() {
 	Exti::connect<Bmi088IntGyro>(Exti::Trigger::RisingEdge, [&](auto){
 		gyro_ready_flag.set();
 	});
+	Exti::connect<Qmc5883lDrdy>(Exti::Trigger::RisingEdge, [&](auto){
+		mag_ready_flag.set();
+	});
 
     PT_YIELD();
     while (true) {
-        PT_WAIT_UNTIL(dataReady());
+        PT_WAIT_UNTIL(bmi088DataReady());
 
         {
             static auto t = modm::PreciseClock::now();
@@ -47,15 +50,22 @@ bool Task<Imu>::pollInternal() {
 		ahrsUpdate();
         angleUpdate();
 
-        { // debug
-            static PrintData pd;
-            pd.data[0] = angle[0];
-            pd.data[1] = angle[1];
-            pd.data[2] = angle[2];
+        if (qmc5883DataReady()) {
+            if (RF_CALL_BLOCKING(qmc5883.readData())) {
+                mag[0] = qmc5883.x();
+                mag[1] = qmc5883.y();
+                mag[2] = qmc5883.z();
+                mag_ready_flag.reset();
+                
+                // debug
+                static PrintData pd;
+                pd.data[0] = mag[0];
+                pd.data[1] = mag[1];
+                pd.data[2] = mag[2];
 
-            Rs485Uart::writeBlocking((uint8_t *)&pd, sizeof(pd));
+                Rs485Uart::writeBlocking((uint8_t *)&pd, sizeof(pd));
+            }
         }
-        
 	}
 
     PT_END();
@@ -79,11 +89,21 @@ bool Imu::init() {
     ret &= bmi088.setGyroGpioConfig(Bmi088::GyroGpioConfig::Int3ActiveHigh);
     ret &= bmi088.setGyroGpioMap(Bmi088::GyroGpioMap::Int3DataReady);
 
+    RF_CALL_BLOCKING(qmc5883.initialize());
+	auto mode = Qmc5883::Mode_t(Qmc5883::Mode::Continious);
+	auto rate = Qmc5883::OutputDataRate_t(Qmc5883::OutputDataRate::_10Hz);
+	auto scale = Qmc5883::FullScale_t(Qmc5883::FullScale::_8G);
+	RF_CALL_BLOCKING(qmc5883.configure(mode, rate | scale));
+
     return ret;
 }
 
-inline bool Imu::dataReady() {
+inline bool Imu::bmi088DataReady() {
     return acc_ready_flag.test() and gyro_ready_flag.test();
+}
+
+inline bool Imu::qmc5883DataReady() {
+    return mag_ready_flag.test();
 }
 
 void Imu::ahrsUpdate() {
