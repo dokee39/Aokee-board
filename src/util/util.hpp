@@ -1,14 +1,15 @@
 #pragma once
 
 #include "modm/math.hpp"
+#include "util/siso.hpp"
 
 template <typename T>
-struct limit {
-    inline limit(const T min, const T max):
+struct limit_m {
+    inline limit_m(const T min, const T max):
         min(min),
         max(max) {
     }
-    inline limit(const T max): limit(-max, max) {}
+    inline limit_m(const T max): limit_m(-max, max) {}
 
     const T min;
     const T max;
@@ -33,4 +34,5 @@ struct limit {
     }
 
 };
+
 

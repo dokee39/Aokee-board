@@ -35,13 +35,13 @@ bool Task<Imu>::pollInternal() {
             t = t_now;
         }
 
-		const std::optional acc_result = bmi088.readAccData();
+		static const std::optional acc_result = bmi088.readAccData();
 		acc_ready_flag.reset();
 		if (acc_result) {
 			acc = acc_result->getFloat() * ACC_UNIT;
 		}
 
-		const std::optional gyro_result = bmi088.readGyroData();
+		static const std::optional gyro_result = bmi088.readGyroData();
 		gyro_ready_flag.reset();
 		if (gyro_result) {
 			gyro = gyro_result->getFloat() * GYRO_UNIT;
@@ -72,30 +72,40 @@ bool Task<Imu>::pollInternal() {
 }
 
 bool Imu::init() {
-    if (not bmi088.initialize(true)) {
-        return false;
+    static bool bmi088_init_ok {false};
+    static bool qmc5883_init_ok {false};
+
+    if (not bmi088_init_ok) {
+        if (not bmi088.initialize(true)) {
+            return false;
+        }
+
+        bool ret {true};
+
+        ret &= bmi088.setAccRate(Bmi088::AccRate::Rate1600Hz_Bw145Hz);
+        ret &= bmi088.setAccRange(Bmi088::AccRange::Range3g);
+        ret &= bmi088.setAccInt1GpioConfig(Bmi088::AccGpioConfig::ActiveHigh |
+                                           Bmi088::AccGpioConfig::EnableOutput);
+        ret &= bmi088.setAccGpioMap(Bmi088::AccGpioMap::Int1DataReady);
+
+        ret &= bmi088.setGyroRate(Bmi088::GyroRate::Rate2000Hz_Bw230Hz);
+        ret &= bmi088.setGyroRange(Bmi088::GyroRange::Range2000dps);
+        ret &= bmi088.setGyroGpioConfig(Bmi088::GyroGpioConfig::Int3ActiveHigh);
+        ret &= bmi088.setGyroGpioMap(Bmi088::GyroGpioMap::Int3DataReady);
+
+        bmi088_init_ok = ret;
     }
 
-    bool ret {true};
+    if (not qmc5883_init_ok) {
+        static constexpr auto mode = Qmc5883::Mode_t(Qmc5883::Mode::Continious);
+        static constexpr auto rate = Qmc5883::OutputDataRate_t(Qmc5883::OutputDataRate::_10Hz);
+        static constexpr auto scale = Qmc5883::FullScale_t(Qmc5883::FullScale::_8G);
+        RF_CALL_BLOCKING(qmc5883.initialize());
+        RF_CALL_BLOCKING(qmc5883.configure(mode, rate | scale));
+        qmc5883_init_ok = true;
+    }
 
-    ret &= bmi088.setAccRate(Bmi088::AccRate::Rate1600Hz_Bw145Hz);
-    ret &= bmi088.setAccRange(Bmi088::AccRange::Range3g);
-    ret &= bmi088.setAccInt1GpioConfig(Bmi088::AccGpioConfig::ActiveHigh |
-                                       Bmi088::AccGpioConfig::EnableOutput);
-    ret &= bmi088.setAccGpioMap(Bmi088::AccGpioMap::Int1DataReady);
-
-    ret &= bmi088.setGyroRate(Bmi088::GyroRate::Rate2000Hz_Bw230Hz);
-    ret &= bmi088.setGyroRange(Bmi088::GyroRange::Range2000dps);
-    ret &= bmi088.setGyroGpioConfig(Bmi088::GyroGpioConfig::Int3ActiveHigh);
-    ret &= bmi088.setGyroGpioMap(Bmi088::GyroGpioMap::Int3DataReady);
-
-    RF_CALL_BLOCKING(qmc5883.initialize());
-	auto mode = Qmc5883::Mode_t(Qmc5883::Mode::Continious);
-	auto rate = Qmc5883::OutputDataRate_t(Qmc5883::OutputDataRate::_10Hz);
-	auto scale = Qmc5883::FullScale_t(Qmc5883::FullScale::_8G);
-	RF_CALL_BLOCKING(qmc5883.configure(mode, rate | scale));
-
-    return ret;
+    return bmi088_init_ok and qmc5883_init_ok;
 }
 
 inline bool Imu::bmi088DataReady() {
@@ -120,7 +130,7 @@ void Imu::ahrsUpdate() {
 
         static modm::Vector3f ei {0.0f};
         ei += KI * dt * e;
-        limit(EI_MAX)(ei);
+        limit_m(EI_MAX)(ei);
         gyro += KP * e + ei;
 
     }
